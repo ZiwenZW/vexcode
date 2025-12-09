@@ -1,0 +1,40 @@
+# VEX PROS Control Utilities
+
+This project provides a set of utility classes and control functions for VEX V5 robots using PROS.  
+It includes **filters**, **control curves**, and an **arcade drive** implementation for precise and smooth robot control.
+
+---
+
+## Features
+
+### 1. Filters
+- **Dead Zone Filter (`deadZoneFilter`)**
+  - Eliminates small joystick noise.
+  - Can limit maximum and minimum input.
+  - Example:
+    ```cpp
+    deadZoneFilter dz(95, 5); // max=95, min=5
+    double filtered_input = dz.apply(joystick_value);
+    ```
+
+- **Template-based filter system**
+  - Flexible for other numeric types.
+  - Easily extendable for low-pass, slew-rate, or Kalman filters.
+
+---
+
+### 2. Control Curves
+- **Linear control (`linearControl`)**
+  - Identity mapping for joystick input.
+  - Can be extended for exponential, cubic, or other custom curves.
+
+- **Template-based control system**
+  - Supports compile-time optimization.
+  - Can chain multiple filters and control modes for advanced driver assistance.
+
+---
+
+### 3. Arcade Drive (`arcadeDrive`)  
+- Combines **forward/backward** and **turning** joystick axes.
+- Automatically normalizes motor power to [-100, 100].
+- Works with PROS motor objects:
